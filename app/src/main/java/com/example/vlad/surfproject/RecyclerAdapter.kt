@@ -5,34 +5,38 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import com.example.vlad.surfproject.presenter.MainPresenter
 
-class RecyclerAdapter(private val radios: List<Radio>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+
+class RecyclerAdapter(private val radioList: List<Radio>,private val view: Contract.View) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent?.context).inflate(R.layout.radio_list_item, parent, false)
         return ViewHolder(itemView)
     }
 
-    override fun getItemCount() = radios.size
+    override fun getItemCount() = radioList.size
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.textView?.text = radios[position].name
-        holder?.itemView?.setBackgroundResource(R.drawable.first)
 
+        holder?.img?.setImageResource(radioList[position].background)
+        holder?.name?.text = radioList[position].name
+        holder?.itemView?.setOnClickListener(){
+            Log.d("MyLog", "Position is $position")
+            val presenter = MainPresenter(view)
+            val context = holder.itemView.context
+            presenter.itemClicked(radioList[position],context)
+        }
     }
 
-    class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
-        override fun onClick(v: View?) {
-            var position = adapterPosition
-                Log.d("MyLog","Position is $position")
-        }
-
-        var textView: TextView? = null
-
+    class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+        var img:ImageView? = null
+        var name:TextView? = null
         init {
-            textView = itemView?.findViewById(R.id.name)
-            itemView?.setOnClickListener(this)
-            }
+            img = itemView?.findViewById(R.id.img_name)
+            name = itemView?.findViewById(R.id.txt_name)
         }
+    }
 }
