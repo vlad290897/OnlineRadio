@@ -1,14 +1,13 @@
-package com.example.vlad.surfproject.presenter
+package com.example.vlad.surfproject.ui.main
 
 import android.content.Context
 
-import com.example.vlad.surfproject.AudioPlayer
-import com.example.vlad.surfproject.Contract
-import com.example.vlad.surfproject.repository.RadioRepository
-import com.example.vlad.surfproject.Radio
+import com.example.vlad.surfproject.interactor.player.AudioPlayer
+import com.example.vlad.surfproject.interactor.storage.RadioRepository
+import com.example.vlad.surfproject.model.Radio
 
 class MainPresenter(val view: Contract.View): Contract.Presenter {
-    override fun itemClicked(radio: Radio,context: Context) {
+    override fun itemClicked(radio: Radio, context: Context) {
         view.showRadioPlayer(radio.name)
         val player = AudioPlayer.instance
         player.onPlay(context,radio.stream)

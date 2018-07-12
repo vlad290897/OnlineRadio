@@ -1,4 +1,4 @@
-package com.example.vlad.surfproject
+package com.example.vlad.surfproject.ui.main
 
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -7,11 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.vlad.surfproject.presenter.MainPresenter
+import com.example.vlad.surfproject.R
+import com.example.vlad.surfproject.model.Radio
 
 
-class RecyclerAdapter(private val radioList: List<Radio>,private val view: Contract.View) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
-
+class RecyclerAdapter(private val radioList: List<Radio>, private val view: Contract.View) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+    val presenter = MainPresenter(view)
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent?.context).inflate(R.layout.radio_list_item, parent, false)
         return ViewHolder(itemView)
@@ -23,9 +24,8 @@ class RecyclerAdapter(private val radioList: List<Radio>,private val view: Contr
 
         holder?.img?.setImageResource(radioList[position].background)
         holder?.name?.text = radioList[position].name
-        holder?.itemView?.setOnClickListener(){
+        holder?.itemView?.setOnClickListener{
             Log.d("MyLog", "Position is $position")
-            val presenter = MainPresenter(view)
             val context = holder.itemView.context
             presenter.itemClicked(radioList[position],context)
         }

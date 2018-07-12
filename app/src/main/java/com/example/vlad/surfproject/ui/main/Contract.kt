@@ -1,6 +1,7 @@
-package com.example.vlad.surfproject
+package com.example.vlad.surfproject.ui.main
 
 import android.content.Context
+import com.example.vlad.surfproject.model.Radio
 
 interface Contract {
 
@@ -10,7 +11,7 @@ interface Contract {
     }
 
     interface Presenter {
-        fun itemClicked(radio: Radio,context: Context)
+        fun itemClicked(radio: Radio, context: Context)
         fun initData()
         fun onDestroy()
     }

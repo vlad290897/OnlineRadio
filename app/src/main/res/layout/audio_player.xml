@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/player_back"
-    tools:context=".view.MainActivity">
+    tools:context=".ui.main.MainActivity">
 
     <com.mikhaellopez.circularimageview.CircularImageView
         android:layout_width="230dp"
@@ -16,7 +16,7 @@
         android:src="@drawable/notka" />
 
     <Button
-        android:id="@+id/btn_play"
+        android:id="@+id/btn_play_and_pause"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
